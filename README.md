@@ -177,7 +177,8 @@ The API includes comprehensive error handling:
    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zshrc
    eval "$(/opt/homebrew/bin/brew shellenv)"
    ```
-   
+ > **Note:** Restart the terminal completely
+  
    For Intel Macs, use:
    ```zsh
    echo 'eval "$(/usr/local/bin/brew shellenv)"' >> ~/.zshrc
