@@ -2,23 +2,9 @@
 MongoDB database connection module using Motor (async driver).
 """
 from motor.motor_asyncio import AsyncIOMotorClient
-from pydantic_settings import BaseSettings
 from typing import Optional
 
-
-class Settings(BaseSettings):
-    """Application settings loaded from environment variables."""
-    
-    mongodb_url: str = "mongodb://localhost:27017"
-    database_name: str = "chl_datastore_db"
-    
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
-        case_sensitive = False
-
-
-settings = Settings()
+from app.core.config import settings
 
 # Global MongoDB client instance
 client: Optional[AsyncIOMotorClient] = None

@@ -9,7 +9,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from app.database import connect_to_mongo, close_mongo_connection
-from app.routes import router
+from app.core.config import settings
+from app.routers import habits, streaks, reflections
 
 
 @asynccontextmanager
@@ -24,22 +25,24 @@ async def lifespan(app: FastAPI):
 
 # Create FastAPI application instance
 app = FastAPI(
-    title="CHL API",
-    description="FastAPI application with MongoDB integration using Motor",
-    version="1.0.0",
+    title=settings.app_name,
+    description="FastAPI application for Gen AI habit tracking with MongoDB integration",
+    version=settings.app_version,
     lifespan=lifespan
 )
 
 # Include routers
-app.include_router(router)
+app.include_router(habits.router)
+app.include_router(streaks.router)
+app.include_router(reflections.router)
 
 
 @app.get("/", tags=["root"])
 async def root():
     """Root endpoint."""
     return {
-        "message": "Welcome to CHL API",
-        "version": "1.0.0",
+        "message": f"Welcome to {settings.app_name}",
+        "version": settings.app_version,
         "docs": "/docs",
         "health": "/health"
     }
@@ -50,5 +53,5 @@ async def health_check():
     """Health check endpoint."""
     return {
         "status": "healthy",
-        "service": "CHL API"
+        "service": settings.app_name
     }
