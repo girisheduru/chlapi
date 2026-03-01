@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     llm_api_base_url: Optional[str] = None  # For custom API endpoints
     llm_temperature: float = 0.7
     llm_max_tokens: int = 1000
+    # OpenRouter-specific optional headers (recommended by OpenRouter docs)
+    openrouter_site_url: Optional[str] = None
+    openrouter_app_name: Optional[str] = None
     
     # Application settings
     app_name: str = "CHL API"
